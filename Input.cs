@@ -8,26 +8,35 @@ using System.Threading.Tasks;
 namespace HoChanMiniGames
 {
     // 콘솔 입력과 관련된 공통 기능
+    // 원하는 문자열이나 숫자 외에 다른 값이 들어왔을 때 예외처리
 
-    class Input
+    public static class Input
     {
-        
-        public static int ReadIntRange(string intro, int minN, int maxN)
+        private static string ReadLineSafe()
+        {
+            string s = Console.ReadLine();
+            return s ?? string.Empty; // Null 병합 연산자 
+        }
+
+        private static string Normalize(string s)
+        {
+            if (s == null)
+            {
+                return string.Empty;
+            }
+            s = s.Trim().ToLower();
+            return s;
+        }
+
+        public static int ReadIntRange(string prompt, int minN, int maxN)
         {
             while (true)
             {
-                Console.Write(intro);
-                string s = Console.ReadLine();
-
-                // null 예외 처리
-                if (s == null)
-                {
-                    Console.WriteLine("입력이 잘못 되었습니다.");
-                    continue;
-                }
+                Console.Write(prompt);
+                string s = ReadLineSafe();
 
                 int n = 0;
-
+                
                 // 예외 처리
                 if (int.TryParse(s, out n) && n >= minN && n <= maxN)
                 {
@@ -40,22 +49,33 @@ namespace HoChanMiniGames
             }
         }
 
-        //▼ 예 / 아니오 로 확인 입력받기 y/yes , n/no 를 소문자로 통일하여 처리
-        public static bool Confirm(string intro)
+        public static int ReadInt(string prompt)
         {
-            Console.WriteLine($"{intro} ( y/n ): ");
             while (true)
             {
-                string s = Console.ReadLine();
-                if (s != null)
+                Console.Write(prompt);
+                string s = ReadLineSafe();
+
+                int n = 0;
+                if (int.TryParse(s , out n))
                 {
-                    s = s.Trim().ToLower(); // 공백을 없애고 소문자로 변환
+                    return n;
                 }
                 else
                 {
-                    s = ""; // null 일경우
+                    Console.WriteLine("숫자로 다시 입력해주세요.");
                 }
+            }
+        }
 
+        //▼ 예 / 아니오 로 확인 입력받기 y/yes , n/no 를 소문자로 통일하여 처리
+        public static bool Confirm(string prompt)
+        {
+            Console.WriteLine($"{prompt} ( y/n ): ");
+            while (true)
+            {
+                string s = Normalize(ReadLineSafe());
+                
                 if (s == "y" || s == "yes")
                 {
                     return true;
@@ -66,7 +86,24 @@ namespace HoChanMiniGames
                     return false;
                 }
 
-                Console.WriteLine("Y 또는 N로 다시 입력해주세요.: ");
+                Console.WriteLine("y 또는 n로 다시 입력해주세요.: ");
+            }
+        }
+
+        public static string ReadString(string prompt, bool isSpace)
+        {
+            while(true)
+            {
+                Console.Write(prompt);
+
+                string s = ReadLineSafe();
+
+                if (!isSpace && s.Trim().Length == 0)
+                {
+                    Console.WriteLine("빈 입력은 허용하지 않습니다. 다시 입력해주세요.");
+                    continue;
+                }
+                return s.Trim();
             }
         }
 
