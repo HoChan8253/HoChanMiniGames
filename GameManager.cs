@@ -62,8 +62,8 @@ namespace HoChanMiniGames
                     break;
                 }
 
-                var select = games[choice - 1]; // <<<<<<< 여기 인덱스 나중에 수정해야함
-                RunGameLoop(select); // 이것도 수정 필요
+                var select = games[choice - 1]; 
+                RunGameLoop(select);
             }
             Console.WriteLine("프로그램을 종료합니다.");
         }

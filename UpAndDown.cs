@@ -26,16 +26,21 @@ namespace HoChanMiniGames
             while ( tries < maxTries )
             {
                 tries++;
+                
                 int n = Input.ReadIntRange($"{tries}번째 입력: ", 1, 100);
 
                 if ( n == cpuChoose )
                 {
                     Console.WriteLine("정답입니다!");
                     Console.WriteLine($"시도 횟수: {tries}");
+                    success = true;
                     break;
-                    
                 }
-                Console.WriteLine( n < cpuChoose ? "UP!" : "DOWN!");
+                Console.WriteLine();
+                Console.ForegroundColor = (n < cpuChoose) ? ConsoleColor.Green : ConsoleColor.Red;
+                Console.WriteLine( n < cpuChoose ? "UP!": "DOWN!");
+                Console.ResetColor();
+                Console.WriteLine();
             }
 
             if ( !success )
