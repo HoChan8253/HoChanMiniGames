@@ -9,13 +9,13 @@ namespace HoChanMiniGames
 {
     internal class Program
     {
-        
-
-
         static void Main(string[] args)
         {
-            Console.Title = "호찬의 콘솔 프로젝트";
-            Console.ReadLine();
+            var manager = new GameManager();
+
+            manager.Register(new UpAndDown());
+
+            manager.Run();
         }
     }
 }

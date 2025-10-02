@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HoChanMiniGames
@@ -61,12 +62,35 @@ namespace HoChanMiniGames
                     break;
                 }
 
-                var select = games[choice]; // <<<<<<< 여기 인덱스 나중에 수정해야함
+                var select = games[choice - 1]; // <<<<<<< 여기 인덱스 나중에 수정해야함
                 RunGameLoop(select); // 이것도 수정 필요
             }
             Console.WriteLine("프로그램을 종료합니다.");
         }
 
+        private void RunGameLoop(IGame game)
+        {
+            bool retry = true;
+
+            while (retry)
+            {
+                Console.Clear();
+                Console.WriteLine($"{game.Title} 시작");
+                Console.WriteLine("-----");
+
+                game.Run();
+
+                Console.WriteLine("-----");
+                Console.WriteLine($"{game.Title} 종료");
+                Console.WriteLine();
+
+                // 한 판이 끝날 때마다 사용자의 행동 묻기
+                Console.WriteLine("[1] 재도전   [2] 메뉴로 돌아가기");
+                int r = Input.ReadIntRange("선택: ", 1, 2);
+
+                retry = (r == 1); // 1입력 받을 경우 재시도
+            }
+        }
 
     }
 }
