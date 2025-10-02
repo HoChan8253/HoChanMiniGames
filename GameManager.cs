@@ -22,28 +22,49 @@ namespace HoChanMiniGames
         {
             games.Add(game);
 
-            //foreach (IGame g in games)
-            //{
-            //    if (g.Id == game.Id)
-            //    {
-            //        return; // 등록된 게임은 패스
-            //    }
-            //}
+            /*foreach (IGame g in games)
+            {
+                if (g.Id == game.Id)
+                {
+                    return; // 등록된 게임은 패스
+                }
+            }*/
         }
 
-        private void MainMenu()
+        private void MainMenu() // 메인화면
         {
-            
+            Console.Clear();
+            Console.WriteLine("==============================");
+            Console.WriteLine("       HoChan MiniGames       ");
+            Console.WriteLine("==============================");
+            Console.WriteLine("[0] 종료");
+
+            for ( int i = 0; i < games.Count; i++ )
+            {
+                Console.WriteLine($"[{i+1}] - {games[i].Title}");
+            }
+            Console.WriteLine();
         }
         
         
-        public void Run()
+        public void Run() // 프로그램의 메인 루프를 담당
         {
-            Console.Title = "HoChan Minigames"; // 콘솔 창 제목 설정
+            Console.Title = "HoChan Mini Games"; // 콘솔 창 제목 설정
             while ( running )
             {
                 MainMenu();
+                int choice = Input.ReadIntRange("선택: ", 0, games.Count); 
+
+                if ( choice == 0 ) // 0 입력시 종료
+                {
+                    running = false; // running 루프 탈출
+                    break;
+                }
+
+                var select = games[choice]; // <<<<<<< 여기 인덱스 나중에 수정해야함
+                RunGameLoop(select); // 이것도 수정 필요
             }
+            Console.WriteLine("프로그램을 종료합니다.");
         }
 
 

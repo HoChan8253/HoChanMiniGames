@@ -5,3 +5,4 @@ C:\Users\truth\source\repos\HoChanMiniGames\obj\Debug\HoChanMiniGames.csproj.Ass
 C:\Users\truth\source\repos\HoChanMiniGames\obj\Debug\HoChanMiniGames.csproj.CoreCompileInputs.cache
 C:\Users\truth\source\repos\HoChanMiniGames\obj\Debug\HoChanMiniGames.exe
 C:\Users\truth\source\repos\HoChanMiniGames\obj\Debug\HoChanMiniGames.pdb
+C:\Users\truth\source\repos\HoChanMiniGames\obj\Debug\HoChanMiniGames.exe.config
