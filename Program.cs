@@ -14,7 +14,8 @@ namespace HoChanMiniGames
 
         static void Main(string[] args)
         {
-
+            Console.Title = "호찬";
+            Console.ReadLine();
         }
     }
 }
