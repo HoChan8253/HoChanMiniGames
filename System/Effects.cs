@@ -28,6 +28,13 @@ namespace HoChanMiniGames
             }
         }
 
+        public static void PrintColor(string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ResetColor();
+        }
+
         /*public static void Wait(string prompt = "계속하려면 Enter...")
         {
             Console.WriteLine(prompt);
