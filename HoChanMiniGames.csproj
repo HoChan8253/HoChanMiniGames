@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Games\CsharpQuiz.cs" />
+    <Compile Include="Games\NumBaseball.cs" />
     <Compile Include="System\Effects.cs" />
     <Compile Include="System\GameManager.cs" />
     <Compile Include="System\Input.cs" />

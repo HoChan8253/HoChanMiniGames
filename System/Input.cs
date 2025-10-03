@@ -16,7 +16,7 @@ namespace HoChanMiniGames
         private static string ReadLineSafe()
         {
             string s = Console.ReadLine();
-            return s ?? string.Empty; // Null 병합 연산자 
+            return s ?? string.Empty; // Null 병합 연산자 , s 가 null 이면 Empty 반환
         }
 
         private static string Normalize(string s)
