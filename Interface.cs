@@ -13,4 +13,23 @@ namespace HoChanMiniGames
         string Title { get; }
         void Run();
     }
+
+    public interface QuizGame : IGame
+    {
+        RoundOut RunRound();
+    }
+
+    public enum NextAction
+    {
+        Retry,
+        Menu
+    }
+
+    public struct RoundOut
+    {
+        public bool correct;
+        public NextAction Next;
+    }
+
+    
 }

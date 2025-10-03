@@ -14,6 +14,7 @@ namespace HoChanMiniGames
             var manager = new GameManager();
 
             manager.Register(new UpAndDown());
+            manager.Register(new RPS());
 
             manager.Run();
         }
