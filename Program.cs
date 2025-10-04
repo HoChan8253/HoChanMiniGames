@@ -15,7 +15,7 @@ namespace HoChanMiniGames
 
             manager.Register(new UpAndDown());
             manager.Register(new RPS());
-            //manager.Register(new NumBaseball());
+            manager.Register(new NumBaseball());
 
             manager.Run();
         }

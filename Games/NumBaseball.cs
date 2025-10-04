@@ -13,7 +13,7 @@ namespace HoChanMiniGames
         public string Title => "숫자 야구";
 
         int inning = 0;
-        const int maxInning = 9; // 최대 10번 기회
+        const int maxInning = 10; // 최대 10번 기회
 
         //랜덤한 4자리 숫자 생성
         private List<int> Answer(int length)
@@ -42,7 +42,7 @@ namespace HoChanMiniGames
             while (inning < maxInning)
             {
                 inning++;
-                string input = Input.ReadString($"{inning} 이닝 입력 (4자리 숫자) : ", false); 
+                string input = Input.ReadString($"\n{inning} 이닝 입력 (4자리 숫자) : ", false); 
                 // 문자열로 받아와야함!! 숫자로 받아오면 4자리 숫자가 아니라 1천자리 숫자됨!!
 
                 if (input.Length != 4 || !int.TryParse(input, out _))
@@ -59,7 +59,8 @@ namespace HoChanMiniGames
                 // Strike / Ball 판정
                 for ( int i = 0; i < 4; i++ )
                 {
-                    int n = input[i];
+                    int n = int.Parse(input[i].ToString()); // 문자를 숫자로 변환
+
                     if (answer[i] == n) // 자리와 숫자 모두 일치
                     {
                         strike++;
@@ -83,7 +84,7 @@ namespace HoChanMiniGames
                 else
                 {
                     //Console.WriteLine($"{strike} 스트라이크, {ball} 볼");
-                    Effects.PrintColor($"{strike} 스트라이크", ConsoleColor.Green);
+                    Effects.PrintColor($"{strike} 스트라이크 ", ConsoleColor.Green);
                     Effects.PrintColor($"{ball} 볼\n", ConsoleColor.Yellow);
                 }
             }
@@ -93,7 +94,7 @@ namespace HoChanMiniGames
 
             foreach ( int n in answer )
             {
-                answerText = n.ToString(); // 정수를 문자열 변환
+                answerText += n.ToString(); // 정수를 문자열 변환
             }
             Console.WriteLine($"정답은 {answerText} 입니다.\n");
         }

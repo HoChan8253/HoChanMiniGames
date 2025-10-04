@@ -31,8 +31,9 @@ namespace HoChanMiniGames
 
                 if ( n == cpuChoose )
                 {
-                    Console.WriteLine("정답입니다!");
-                    Console.WriteLine($"시도 횟수: {tries}");
+                    Effects.PrintColor($"\n정답입니다!\n", ConsoleColor.Yellow);
+                    Console.Write($"시도 횟수: ");
+                    Effects.PrintColor($"{tries} 번\n", ConsoleColor.Green);
                     success = true;
                     break;
                 }
