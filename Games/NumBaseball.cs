@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HoChanMiniGames
@@ -44,15 +45,15 @@ namespace HoChanMiniGames
                 inning++;
                 string input = Input.ReadString($"\n{inning} 이닝 입력 (4자리 숫자) : ", false); 
                 // 문자열로 받아와야함!! 숫자로 받아오면 4자리 숫자가 아니라 1천자리 숫자됨!!
-
+                // 문제점 있음 : 동일한 4개의 숫자도 입력이 됨
+                
                 if (input.Length != 4 || !int.TryParse(input, out _))
                 {
-                    Console.WriteLine("4자리 숫자를 정확히 입력해주세요.");
+                    Console.WriteLine("\n4자리 숫자를 정확히 입력해주세요.");
                     inning--;
                     continue;
                 }
 
-                
                 int strike = 0;
                 int ball = 0;
 

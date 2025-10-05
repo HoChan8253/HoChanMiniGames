@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Games\AcidRain.cs" />
     <Compile Include="Games\CsharpQuiz.cs" />
     <Compile Include="Games\NumBaseball.cs" />
+    <Compile Include="Games\Reaction.cs" />
     <Compile Include="System\Effects.cs" />
     <Compile Include="System\GameManager.cs" />
     <Compile Include="System\Input.cs" />

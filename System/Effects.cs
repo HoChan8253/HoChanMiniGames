@@ -27,7 +27,7 @@ namespace HoChanMiniGames
                 Thread.Sleep(delay);
             }
         }
-
+        
         public static void PrintColor(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;

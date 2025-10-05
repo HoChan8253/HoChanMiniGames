@@ -14,10 +14,10 @@ namespace HoChanMiniGames
         void Run();
     }
 
-    public interface QuizGame : IGame
-    {
-        RoundOut RunRound();
-    }
+    //public interface QuizGame : IGame
+    //{
+    //    RoundOut RunRound();
+    //}
 
     public enum NextAction
     {

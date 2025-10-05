@@ -65,7 +65,9 @@ namespace HoChanMiniGames
                 var select = games[choice - 1]; 
                 RunGameLoop(select);
             }
-            Console.WriteLine("프로그램을 종료합니다.");
+            Console.WriteLine();
+            Effects.PrintColor("프로그램", ConsoleColor.Red);
+            Console.WriteLine("을 종료합니다.\n");
         }
 
         private void RunGameLoop(IGame game)
