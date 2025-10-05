@@ -46,7 +46,7 @@ namespace HoChanMiniGames
         private const char Food = '*';
         private const char Head = 'O';
         private const char Body = 'o';
-
+        
         // 뱀 몸체 : 머리는 Last , 꼬리는 First
         private static LinkedList<Pos> snake;
 
@@ -78,6 +78,7 @@ namespace HoChanMiniGames
             GameLoop();
             GameOver();
 
+            Console.CursorVisible = hideCursor;
         }
 
         private static void GameSetting()
@@ -88,16 +89,16 @@ namespace HoChanMiniGames
             board = new char[BoardHeight, BoardWidth];
 
             // 전체를 빈 칸으로 채우기
-            int x = 0;
-            while (x < BoardHeight)
+            int y = 0;
+            while (y < BoardHeight)
             {
-                int y = 0;
-                while (y < BoardWidth)
+                int x = 0;
+                while (x < BoardWidth)
                 {
-                    board[x, y] = Empty; // 현재 위치에 채우기
-                    y = y + 1; // y 좌표 하나씩 이동하면서 채우기
+                    board[y, x] = Empty; // 현재 위치에 채우기
+                    x = x + 1; // x 좌표 하나씩 이동하면서 채우기
                 }
-                x = x + 1; // x 좌표 하나씩 이동하면서 채우기
+                y = y + 1; // y 좌표 하나씩 이동하면서 채우기
             }
 
             // 외곽에 벽 세우기
@@ -139,7 +140,7 @@ namespace HoChanMiniGames
 
             // 현재 상태를 보드에 반영하고 그리기
             RefreshBoard();
-            Update();
+            UpdateBoard();
             UpdateHUD();
         }
 
@@ -150,7 +151,7 @@ namespace HoChanMiniGames
                 HandleInput();
                 Step();
                 RefreshBoard();
-                Update();
+                UpdateBoard();
                 UpdateHUD();
 
                 Thread.Sleep(gameSpeed);
@@ -163,7 +164,7 @@ namespace HoChanMiniGames
             Console.SetCursorPosition(0, BoardHeight + 2);
             Console.WriteLine("======GAME OVER======");
             Console.Write("Result : ");
-            Console.WriteLine("score");
+            Console.WriteLine(score);
             Console.WriteLine("아무 키나 눌러주세요.");
             Console.ReadKey(true);
         }
@@ -272,22 +273,28 @@ namespace HoChanMiniGames
 
             Pos nextHead = new Pos(nextX, nextY);
 
-            // 먹이를 먹는지 판단
-            bool willEat = (nextHead.X == food.X) && (nextHead.Y == food.Y);
+            if (nextX < 0 || nextX >= BoardWidth || nextY < 0 || nextY >= BoardHeight)
+            {
+                isGameOver = true;
+                return;
+            }
 
             // 충돌 판단을 위해 "다음 칸"의 현재 보드 문자 확인
             // 다음 칸이 꼬리이고 이번 턴에 성장 ( 먹이를 먹지 않으면 )하지 않으면,
             // 꼬리는 곧 빠질 예정이므로 충돌이 아니다!!
             char nextCell = board[nextY, nextX];
 
+            // 먹이를 먹는지 판단
+            bool willEat = (nextHead.X == food.X) && (nextHead.Y == food.Y);
+
             // 꼬리 좌표
             Pos tail = snake.First.Value;
 
             // 다음 칸이 현재 꼬리 칸인지 판정
             bool isNextTail = (nextHead.X == tail.X) && (nextHead.Y == tail.Y);
-
+            
             // 벽 충돌 확인
-            if (nextCell == Wall)
+            if(nextCell == Wall)
             {
                 isGameOver = true;
                 return;
@@ -329,17 +336,17 @@ namespace HoChanMiniGames
         // 현재 상태 ( 벽 / 빈칸 / 먹이 / 뱀 )를 보드에 반영해야함
         private static void RefreshBoard()
         {
-            // 보드 전체를 빈칸으로 리셋
-            int x = 0;
-            while (x < BoardHeight)
+            // 전체를 빈 칸으로 채우기
+            int y = 0;
+            while (y < BoardHeight)
             {
-                int y = 0;
-                while (y < BoardWidth)
+                int x = 0;
+                while (x < BoardWidth)
                 {
-                    board[x, y] = Empty; // 현재 위치에 채우기
-                    y = y + 1; // y 좌표 하나씩 이동하면서 채우기
+                    board[y, x] = Empty; // 현재 위치에 채우기
+                    x = x + 1; // x 좌표 하나씩 이동하면서 채우기
                 }
-                x = x + 1; // x 좌표 하나씩 이동하면서 채우기
+                y = y + 1; // y 좌표 하나씩 이동하면서 채우기
             }
 
             // 외곽에 벽 세우기
@@ -361,7 +368,7 @@ namespace HoChanMiniGames
             }
 
             // 먹이 생성
-            board[food.X, food.Y] = Food;
+            board[food.Y, food.X] = Food;
 
             // 뱀 생성
             LinkedListNode<Pos> node = snake.First;
@@ -372,46 +379,62 @@ namespace HoChanMiniGames
                 // 마지막 노드 확인 ( 머리 / 몸통 구분 )
                 bool isHead = (node == snake.Last);
 
+
                 if (isHead)
                 {
-                    board[p.X, p.Y] = Head;
+                    board[p.Y, p.X] = Head;
                 }
                 else
                 {
-                    board[p.X, p.Y] = Body;
+                    board[p.Y, p.X] = Body;
                 }
+
+                board[p.Y, p.X] = isHead ? Head : Body;
 
                 node = node.Next;
             }
         }
 
         // 매 프레임 전체 갱신
-        private static void Update()
+        private static void UpdateBoard()
         {
             // 커서를 0,0 이동시킨 후 화면 덮어씌울 목적
             Console.SetCursorPosition(0, 0);
 
-            // 보드 전체를 빈칸으로 리셋
-            int x = 0;
-            while (x < BoardHeight)
+            // 전체를 빈 칸으로 채우기
+            
+            int y = 0;
+            while (y < BoardHeight)
             {
-                int y = 0;
-                while (y < BoardWidth)
+                int x = 0;
+                while (x < BoardWidth)
                 {
-                    board[x, y] = Empty; // 현재 위치에 채우기
-                    y = y + 1; // y 좌표 하나씩 이동하면서 채우기
+                    Console.Write(board[y, x]); // 현재 위치에 채우기
+                    x++; // x 좌표 하나씩 이동하면서 채우기
                 }
-                x = x + 1; // x 좌표 하나씩 이동하면서 채우기
+                Console.WriteLine();
+                y++; // y 좌표 하나씩 이동하면서 채우기
             }
         }
 
         // 점수 / 조작법 표시
         private static void UpdateHUD()
         {
+            int hudRow = BoardHeight; // 보드 아래줄에 표시
+            Console.SetCursorPosition(0, hudRow);
+
+            int clearLine = Math.Max(BoardWidth, 60); // 60줄 까지 비울것
+            int i = 0;
+            while ( i < clearLine )
+            {
+                Console.Write(' ');
+                i++;
+            }
+
             Console.SetCursorPosition(0, BoardHeight);
             Console.Write("Score : ");
             Console.WriteLine(score);
-            Console.Write("  ↑  \n");
+            Console.Write("   ↑  \n");
             Console.Write("← ↓ →  Move : Arrow Keys");
         }
         
