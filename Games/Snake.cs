@@ -43,7 +43,7 @@ namespace HoChanMiniGames
         // 2차원 배열에 그릴 문자들
         private const char Wall = '#';
         private const char Empty = ' ';
-        private const char Food = '*';
+        private const char Food = '●';
         private const char Head = 'O';
         private const char Body = 'o';
         
@@ -161,11 +161,11 @@ namespace HoChanMiniGames
         // 게임오버 안내
         private static void GameOver()
         {
-            Console.SetCursorPosition(0, BoardHeight + 2);
-            Console.WriteLine("======GAME OVER======");
-            Console.Write("Result : ");
+            Console.SetCursorPosition(0, BoardHeight);
+            Console.WriteLine("==========GAME OVER==========");
+            Console.Write("점수 : ");
             Console.WriteLine(score);
-            Console.WriteLine("아무 키나 눌러주세요.");
+            Console.WriteLine("=====아무 키나 눌러주세요=====");
             Console.ReadKey(true);
         }
 
@@ -409,6 +409,17 @@ namespace HoChanMiniGames
                 int x = 0;
                 while (x < BoardWidth)
                 {
+                    char cell = board[y, x];
+                                        
+                    if ( cell == Food )
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else
+                    {
+                        Console.ResetColor();
+                    }
+
                     Console.Write(board[y, x]); // 현재 위치에 채우기
                     x++; // x 좌표 하나씩 이동하면서 채우기
                 }
