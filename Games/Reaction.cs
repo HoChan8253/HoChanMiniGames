@@ -43,7 +43,7 @@ namespace HoChanMiniGames
                     //Thread.Sleep(rnd.Next(2000, 8000));
                     int waitTime = rnd.Next(2000, 8000); // 기다리는 시간 값만 저장 ( Thread.Sleep 적용 x )
                     int elapsed = 0; // 경과 시간
-                    int step = 50; // 50ms 단위로 검사
+                    int step = 20; // 20ms 단위로 검사
 
                     bool early = false;
 
@@ -66,7 +66,7 @@ namespace HoChanMiniGames
                     {
                         Effects.PrintColor("\n너무 빠르게 입력하셨어요!\n", ConsoleColor.Red);
                         Console.WriteLine("다시 시도합니다.");
-                        Thread.Sleep(1500);
+                        Thread.Sleep(800);
                         continue; // while(true) 루프 처음으로 되돌아감
                     }
 
