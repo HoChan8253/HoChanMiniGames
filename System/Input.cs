@@ -108,5 +108,13 @@ namespace HoChanMiniGames
             }
         }
 
+        public static string NormalizeInput(string s)
+        {
+            string x = s;
+            x = x ?? "";
+            x = x.Trim();
+            x = x.ToLowerInvariant(); // 대소문자 구분 제거
+            return x;
+        }
     }
 }

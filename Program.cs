@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HoChanMiniGames.Games;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace HoChanMiniGames
             manager.Register(new RPS());
             manager.Register(new NumBaseball());
             manager.Register(new Reaction());
+            //manager.Register(new Quiz());
 
             manager.Run();
         }
