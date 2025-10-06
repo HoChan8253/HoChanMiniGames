@@ -116,5 +116,43 @@ namespace HoChanMiniGames
             x = x.ToLowerInvariant(); // 대소문자 구분 제거
             return x;
         }
+
+        public static bool ReadCoordXY(out int w, out int h, int maxWidth, int maxHeight)
+        {
+            w = 0;
+            h = 0;
+
+            while (true)
+            {
+                Console.Write($"x를 입력해주세요 ( 0 ~ {(maxWidth - 1)} ) : ");
+                string sw = Console.ReadLine();
+
+                if (!int.TryParse(sw , out w))
+                {
+                    Console.WriteLine("숫자로 입력해주세요.");
+                    continue;
+                }
+                if(w < 0 || w > maxWidth)
+                {
+                    Console.WriteLine("범위를 벗어났습니다. 다시 입력해주세요.");
+                    continue;
+                }
+
+                Console.Write($"y를 입력해주세요 ( 0 ~ {(maxHeight - 1)} ) : ");
+                string sh = Console.ReadLine();
+
+                if(!int.TryParse(sh, out h))
+                {
+                    Console.WriteLine("숫자로 입력해주세요.");
+                    continue;
+                }
+                if(h < 0 || h >= maxHeight)
+                {
+                    Console.WriteLine("범위를 벗어났습니다. 다시 입력해주세요.");
+                    continue;
+                }
+                return true;
+            }
+        }
     }
 }

@@ -14,11 +14,6 @@ namespace HoChanMiniGames
         void Run();
     }
 
-    //public interface QuizGame : IGame
-    //{
-    //    RoundOut RunRound();
-    //}
-
     public enum NextAction
     {
         Retry,
@@ -30,6 +25,4 @@ namespace HoChanMiniGames
         public bool correct;
         public NextAction Next;
     }
-
-    
 }

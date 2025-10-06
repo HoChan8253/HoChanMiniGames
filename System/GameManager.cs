@@ -22,22 +22,15 @@ namespace HoChanMiniGames
         public void Register(IGame game) // 게임 등록
         {
             games.Add(game);
-
-            /*foreach (IGame g in games)
-            {
-                if (g.Id == game.Id)
-                {
-                    return; // 등록된 게임은 패스
-                }
-            }*/
         }
 
         private void MainMenu() // 메인화면
         {
             Console.Clear();
-            Console.WriteLine("==============================");
-            Console.WriteLine("       HoChan MiniGames       ");
-            Console.WriteLine("==============================");
+            Effects.PrintColor("==============================\n", ConsoleColor.DarkYellow);
+            Effects.PrintColor("       HoChan", ConsoleColor.Cyan);
+            Effects.PrintColor(" MiniGames       \n", ConsoleColor.DarkGreen);
+            Effects.PrintColor("==============================\n", ConsoleColor.DarkYellow);
             Console.WriteLine("[0] 종료");
 
             for ( int i = 0; i < games.Count; i++ )
@@ -78,11 +71,11 @@ namespace HoChanMiniGames
             {
                 Console.Clear();
                 Console.WriteLine($"{game.Title} 시작");
-                Console.WriteLine("-----");
+                Console.WriteLine("==========");
 
                 game.Run();
 
-                Console.WriteLine("-----");
+                Console.WriteLine("==========");
                 Console.WriteLine($"{game.Title} 종료");
                 Console.WriteLine();
 

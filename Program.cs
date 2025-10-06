@@ -1,4 +1,4 @@
-﻿using HoChanMiniGames.Games;
+﻿using HoChanMiniGames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +12,18 @@ namespace HoChanMiniGames
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(120, 40);
+            Console.SetBufferSize(120, 40);
+
             var manager = new GameManager();
 
             manager.Register(new Snake());
+            manager.Register(new MemoryMatch());
             manager.Register(new UpAndDown());
             manager.Register(new RPS());
             manager.Register(new NumBaseball());
             manager.Register(new Reaction());
-            //manager.Register(new Quiz());
-
+                        
             manager.Run();
         }
     }

@@ -43,7 +43,7 @@ namespace HoChanMiniGames
                     //Thread.Sleep(rnd.Next(2000, 8000));
                     int waitTime = rnd.Next(2000, 8000); // 기다리는 시간 값만 저장 ( Thread.Sleep 적용 x )
                     int elapsed = 0; // 경과 시간
-                    int step = 20; // 20ms 단위로 검사
+                    int step = 10; // 10ms 단위로 검사
 
                     bool early = false;
 

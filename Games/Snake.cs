@@ -32,8 +32,8 @@ namespace HoChanMiniGames
 
         #region Board Settings
         // 보드 설정
-        private const int BoardWidth = 30; // 가로 X
-        private const int BoardHeight = 30; // 세로 Y
+        private const int BoardWidth = 24; // 가로 X
+        private const int BoardHeight = 24; // 세로 Y
 
         private const int TickMs = 120; // 게임 속도
 
@@ -43,8 +43,8 @@ namespace HoChanMiniGames
         // 2차원 배열에 그릴 문자들
         private const char Wall = '#';
         private const char Empty = ' ';
-        private const char Food = '●';
-        private const char Head = 'O';
+        private const char Food = 'O'; 
+        private const char Head = '@'; 
         private const char Body = 'o';
         
         // 뱀 몸체 : 머리는 Last , 꼬리는 First
@@ -162,10 +162,14 @@ namespace HoChanMiniGames
         private static void GameOver()
         {
             Console.SetCursorPosition(0, BoardHeight);
-            Console.WriteLine("==========GAME OVER==========");
-            Console.Write("점수 : ");
-            Console.WriteLine(score);
-            Console.WriteLine("=====아무 키나 눌러주세요=====");
+            Console.Write("==========");
+            Effects.PrintColor(" GAME OVER ", ConsoleColor.Red);
+            Console.WriteLine("==========");
+            Console.Write("          점수 : ");
+            Effects.PrintColor($"{score}\n", ConsoleColor.Green);
+            Console.Write("=====");
+            Effects.PrintColor(" 아무 키나 눌러주세요 ", ConsoleColor.Yellow);
+            Console.WriteLine("=====");
             Console.ReadKey(true);
         }
 
