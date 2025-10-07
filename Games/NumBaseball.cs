@@ -35,6 +35,8 @@ namespace HoChanMiniGames
 
         public void Run()
         {
+            inning = 0;
+
             List<int> answer = Answer(4); // 랜덤 4자리 ( 중복 없어야함 )
 
             Console.WriteLine("숫자 야구 게임 시작! (서로 다른 4자리 숫자를 맞춰보세요.)");
@@ -45,8 +47,7 @@ namespace HoChanMiniGames
                 inning++;
                 string input = Input.ReadString($"\n{inning} 이닝 입력 (4자리 숫자) : ", false); 
                 // 문자열로 받아와야함!! 숫자로 받아오면 4자리 숫자가 아니라 1천자리 숫자됨!!
-                // 문제점 있음 : 동일한 4개의 숫자도 입력이 됨
-                
+                                
                 if (input.Length != 4 || !int.TryParse(input, out _))
                 {
                     Console.WriteLine("\n4자리 숫자를 정확히 입력해주세요.");

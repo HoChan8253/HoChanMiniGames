@@ -61,6 +61,7 @@ namespace HoChanMiniGames
             Console.WriteLine();
             Effects.PrintColor("프로그램", ConsoleColor.Red);
             Console.WriteLine("을 종료합니다.\n");
+            
         }
 
         private void RunGameLoop(IGame game)
@@ -86,6 +87,5 @@ namespace HoChanMiniGames
                 retry = (r == 1); // 1입력 받을 경우 재시도
             }
         }
-
     }
 }

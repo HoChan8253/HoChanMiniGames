@@ -452,6 +452,5 @@ namespace HoChanMiniGames
             Console.Write("   ↑  \n");
             Console.Write("← ↓ →  Move : Arrow Keys");
         }
-        
     }
 }

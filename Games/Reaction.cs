@@ -39,8 +39,7 @@ namespace HoChanMiniGames
                     Console.WriteLine($"Round {round} / 3");
                     Effects.PrintColor("준비...", ConsoleColor.Red);
                     Thread.Sleep(1000);
-
-                    //Thread.Sleep(rnd.Next(2000, 8000));
+                                        
                     int waitTime = rnd.Next(2000, 8000); // 기다리는 시간 값만 저장 ( Thread.Sleep 적용 x )
                     int elapsed = 0; // 경과 시간
                     int step = 10; // 10ms 단위로 검사
@@ -112,16 +111,5 @@ namespace HoChanMiniGames
             Console.WriteLine("엔터를 눌러주세요.");
             Console.ReadLine();
         }
-
-        #region 수정
-        //Console.WriteLine("준비...");
-        //Thread.Sleep(1000);
-
-        //Random rnd = new Random();
-        //Thread.Sleep(rnd.Next(2000, 8000));
-
-        //Effects.PrintColor("'지금!'\n", ConsoleColor.Yellow);
-        //DateTime start = DateTime.Now;
-        #endregion
     }
 }

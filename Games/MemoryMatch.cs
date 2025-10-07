@@ -170,6 +170,16 @@ namespace HoChanMiniGames
                 PrintBoard();
 
                 // 첫번째 좌표 입력 ( x , y )
+                Console.WriteLine("\n게임을 종료하려면 Q를 입력하세요.");
+                string firstInput = Console.ReadLine()?.Trim();
+
+                if (firstInput?.ToUpper() == "Q")
+                {
+                    Effects.PrintColor("현재 게임을 종료합니다.\n", ConsoleColor.Yellow);
+                    Console.ReadKey();
+                    return;
+                }
+
                 int x1 = 0;
                 int y1 = 0;
                 if (!Input.ReadCoordXY(out x1, out y1, Width, Height))
